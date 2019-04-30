@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {Categories} from "./categories";
 import {CategorieData} from "./categoriesData";
 import * as _ from 'lodash';
+import {Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +11,14 @@ import * as _ from 'lodash';
 export class CategorieService {
 categories= CategorieData;
  pageCategories:any;
-  constructor() { }
+ private url="http://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+  constructor(private http:HttpClient) { }
 
   getCategories(): Categories[]{
     return this.categories;
+  }
+  getCategories1():Observable<Categories[]>{
+    return this.http.get<Categories[]>(this.url);
   }
   deleteCategorie(categorie: Categories): void {
     this.categories.splice(this.categories.indexOf(categorie), 1);
